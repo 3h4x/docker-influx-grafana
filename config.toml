@@ -32,7 +32,7 @@ read-timeout = "5s"
 
   [input_plugins.collectd]
   enabled = true
-  port = 25826
+  port = 8001
   database = "grafana"
   typesdb = "/usr/share/collectd/types.db"
 

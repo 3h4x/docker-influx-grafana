@@ -144,7 +144,8 @@ if [ ! -f /.elasticsearch_configured ]; then
 fi
 
 echo "=> Starting and running Nginx..."
+/usr/sbin/nginx
 
 echo "=> Starting InfluxDB ..."
 
-exec /usr/sbin/nginx -g "daemon off;"; /usr/bin/influxdb -config=${CONFIG_FILE}
+exec /usr/bin/influxdb -config=${CONFIG_FILE}
