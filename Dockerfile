@@ -8,6 +8,20 @@ RUN curl -s -o /tmp/influxdb_latest_amd64.deb https://s3.amazonaws.com/influxdb/
   rm /tmp/influxdb_latest_amd64.deb && \
   rm -rf /var/lib/apt/lists/*
 
+ENV GRAFANA_VERSION 1.9.1
+RUN apt-get update && \
+    apt-get install -y wget pwgen apache2-utils && \
+    wget http://grafanarel.s3.amazonaws.com/grafana-${GRAFANA_VERSION}.tar.gz -O grafana.tar.gz && \
+    tar zxf grafana.tar.gz && \
+    rm grafana.tar.gz && \
+    rm -rf app && \
+    mv grafana-${GRAFANA_VERSION} app && \
+    apt-get autoremove -y wget && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && apt-get -qy install nginx
+
 ADD config.toml /config/config.toml
 ADD run.sh /run.sh
 RUN chmod +x /*.sh
@@ -25,18 +39,7 @@ EXPOSE 8086
 # HTTPS API
 EXPOSE 8084
 
-ENV GRAFANA_VERSION 1.9.1
 
-RUN apt-get update && \
-    apt-get install -y wget pwgen apache2-utils && \
-    wget http://grafanarel.s3.amazonaws.com/grafana-${GRAFANA_VERSION}.tar.gz -O grafana.tar.gz && \
-    tar zxf grafana.tar.gz && \
-    rm grafana.tar.gz && \
-    rm -rf app && \
-    mv grafana-${GRAFANA_VERSION} app && \
-    apt-get autoremove -y wget && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
 
 ADD grafana/config.js /app/config.js
 ADD grafana/default /etc/nginx/sites-enabled/default

@@ -4,11 +4,11 @@ function (Settings) {
     datasources: {
       influx: {
         default: true,
-        grafanaDB: <--GRAFANADB-->,
+        grafanaDB: "grafana",
         type: 'influxdb',
-        url: "http://"+window.location.hostname+":8086/db/<--DB_NAME-->",
-        username: "<--USER-->",
-        password: "<--PASS-->",
+        url: "http://"+window.location.hostname+":8086/db/grafana",
+        username: "root",
+        password: "root",
       }
     },
     default_route: '/dashboard/file/default.json',

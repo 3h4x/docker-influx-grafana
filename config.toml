@@ -30,6 +30,12 @@ read-timeout = "5s"
 
 [input_plugins]
 
+  [input_plugins.collectd]
+  enabled = true
+  port = 25826
+  database = "grafana"
+  typesdb = "/usr/share/collectd/types.db"
+
   # Configure the graphite api
   [input_plugins.graphite]
   enabled = false
