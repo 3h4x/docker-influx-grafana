@@ -38,8 +38,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-ADD config.js /app/config.js
-ADD default /etc/nginx/sites-enabled/default
+ADD grafana/config.js /app/config.js
+ADD grafana/default /etc/nginx/sites-enabled/default
 
 # Environment variables for HTTP AUTH
 ENV HTTP_USER admin
