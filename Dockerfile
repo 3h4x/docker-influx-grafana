@@ -21,6 +21,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get -qy install nginx
+RUN apt-get update && apt-get -qy install collectd
 
 ADD config.toml /config/config.toml
 ADD run.sh /run.sh
