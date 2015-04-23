@@ -3,6 +3,9 @@
 set -m
 CONFIG_FILE="/config/config.toml"
 
+echo "=> Starting and running Nginx..."
+/usr/sbin/nginx
+
 #Dynamically change the value of 'max-open-shards' to what 'ulimit -n' returns
 sed -i "s/^max-open-shards.*/max-open-shards = $(ulimit -n)/" ${CONFIG_FILE}
 
@@ -143,8 +146,6 @@ if [ ! -f /.elasticsearch_configured ]; then
     /set_elasticsearch.sh
 fi
 
-echo "=> Starting and running Nginx..."
-/usr/sbin/nginx
 
 echo "=> Starting InfluxDB ..."
 
